@@ -22,6 +22,10 @@ const int servoPinB = 13;  // D7 -> GPIO 13
 const int servoPinC = 15;  // D8 -> GPIO 15
 const int startAngle = 0;
 
+//buzzer and button
+const int buzzerPin = 14;   // D5 -> GPIO 14
+const int buttonPin = 2;    // D4 -> GPIO 2
+
 void setup() {
   Serial.begin(9600);
 
@@ -71,6 +75,10 @@ void setup() {
   servoA.write(startAngle);
   servoB.write(startAngle);
   servoC.write(startAngle);
+
+  //initialize buzzer and button
+  pinMode(buzzerPin, OUTPUT);
+  pinMode(buttonPin, INPUT_PULLUP);
 }
 
 void loop() {
