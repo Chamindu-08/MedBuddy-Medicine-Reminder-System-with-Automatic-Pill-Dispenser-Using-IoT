@@ -1,6 +1,7 @@
 #include <ESP8266Firebase.h>
 #include <ESP8266WiFi.h>
 #include <RTClib.h>
+#include <LiquidCrystal_I2C.h>
 
 #define _SSID "gift"
 #define _PASSWORD ""
@@ -8,10 +9,18 @@
 
 Firebase firebase(REFERENCE_URL);
 RTC_DS3231 rtc;
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 void setup() {
   Serial.begin(9600);
 
+  //LCD initialization
+  lcd.begin();
+  lcd.backlight();
+  lcd.print("    MedBuddy");
+  delay(1000);
+
+  //connect to the wifi
   Serial.println();
   Serial.print("Connecting to: ");
   Serial.println(_SSID);
@@ -30,7 +39,6 @@ void setup() {
     Serial.println("Firebase Connected Successfully");
   } else {
     Serial.println("Firebase Connection Failed!");
-    Serial.println(firebase.error());
   }
 
   //initialize RTC
